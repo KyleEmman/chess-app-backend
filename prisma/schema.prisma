@@ -19,6 +19,7 @@ model User {
   name         String
   password     String
   role         String
+  review       Boolean       @default(false)
   games        Game[]
   preparations Preparation[]
 }

@@ -53,18 +53,20 @@ export class AuthService {
     // if password incorrect throw exception
     if (!passMatch) throw new ForbiddenException('Incorrect password');
     // send back the user
-    return this.signToken(user.id, user.studentId, user.role);
+    return this.signToken(user.id, user.studentId, user.role, user.name);
   }
 
   async signToken(
     userId: number,
     studentId: string,
     role: string,
+    name: string,
   ): Promise<{ access_token: string }> {
     const payload = {
       sub: userId,
       studentId,
       role,
+      name,
     };
 
     const secret = this.config.get('JWT_SECRET');
