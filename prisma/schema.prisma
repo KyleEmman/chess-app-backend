@@ -19,7 +19,6 @@ model User {
   name         String
   password     String
   role         String
-  review       Boolean       @default(false)
   games        Game[]
   preparations Preparation[]
 }
@@ -29,10 +28,11 @@ model Game {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  link   String @unique
+  link   String  @unique
   result String
-  by     User   @relation(fields: [byId], references: [id])
-  byId   Int
+  review Boolean @default(false)
+  user   User    @relation(fields: [userId], references: [id])
+  userId Int
 }
 
 model Preparation {
@@ -43,7 +43,8 @@ model Preparation {
   player   String
   result   String
   division String
-  link     String @unique
-  by       User   @relation(fields: [byId], references: [id])
-  byId     Int
+  link     String  @unique
+  review   Boolean @default(false)
+  user     User    @relation(fields: [userId], references: [id])
+  userId   Int
 }
