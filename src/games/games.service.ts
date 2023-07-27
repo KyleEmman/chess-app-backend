@@ -87,4 +87,18 @@ export class GamesService {
       return { error: error.message };
     }
   }
+
+  async player(id: number) {
+    try {
+      const games = await this.prisma.game.findMany({
+        where: {
+          id,
+        },
+      });
+
+      return { data: games };
+    } catch (error) {
+      return { error: error.message };
+    }
+  }
 }

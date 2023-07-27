@@ -58,4 +58,11 @@ export class GamesController {
     };
     return this.gamesService.edit(data);
   }
+
+  @UseGuards(AuthGuard('jwt'))
+  @Get('player')
+  player(@Req() req: Request) {
+    const user = req.user as IUser;
+    return this.gamesService.player(user.id);
+  }
 }
